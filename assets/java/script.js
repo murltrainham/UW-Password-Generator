@@ -63,15 +63,33 @@ function generatePassword() {
     // return;
   }
 
-  console.log(passLengthUser);
+  // logging boolean returns using confirm to generate true or false
 
-  numbersUser = window.prompt("User numbers?");
+  numbersUser = confirm("User numbers?");
 
-  lowLettersUser = window.prompt("Use lower case characters?");
+  console.log(numbersUser);
 
-  capLettersUser = window.prompt("Use upper case characters?");
+  lowLettersUser = confirm("Use lower case characters?");
 
-  specialCharactersUser = window.prompt("Use special characters?");
+  console.log(lowLettersUser);
+
+  capLettersUser = confirm("Use upper case characters?");
+
+  console.log(capLettersUser);
+
+  specialCharactersUser = confirm("Use special characters?");
+
+  console.log(specialCharactersUser);
+
+  // start logical operators madness
+
+  if (numbersUser === false && lowLettersUser === false && capLettersUser === false && specialCharactersUser === false) {
+    alert("You must select a password length and one of the following options to generate a password: numbers, lower case letters, upper case letters, or special characters.");
+
+    // keeps password field in default state instead of displaying undefined
+    return null;
+  }
+
 
   if (numbersUser) {
     result = result.concat(passwordArray.numbersArray);
@@ -87,18 +105,6 @@ function generatePassword() {
 
   if (specialCharactersUser) {
     result = result.concat(passwordArray.specialCharactersArray);
-  }
-
-  while (result < passLengthUser) {
-    if (
-      numbersUser === false &&
-      lowLettersUser === false &&
-      capLettersUser === false &&
-      specialCharactersUser === false
-    )
-      window.alert(
-        "You must choose to use at least one of the following: numbers, lower case letters, upper case letters, or special characters."
-      );
   }
 
 
