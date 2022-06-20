@@ -8,13 +8,9 @@
 
 // replace mathfloor w/ ~~
 
-// join() to join arrays then use 
+// join() to join arrays then use
 
-// object literal structure key : value / var *varname* = { var : *varname* = *value* : *key*} , 
-
-// Math.random() instead of ? 
-
-// char sets and defining variables
+// object literal structure key : value / var *varname* = { var : *varname* = *value* : *key*},
 
 // user input defined by acceptance criteria
 // password length (8-128 characters)?
@@ -41,42 +37,38 @@ generateBtn.addEventListener("click", writePassword);
 
 //END DEFAULT CODE
 
-  var numbersArray = "123456789".split("");
+var numbersArray = "123456789".split("");
 
-  var lowLettersArray = "abcdefghijklmnopqrstuvwxyz".split("");
+var lowLettersArray = "abcdefghijklmnopqrstuvwxyz".split("");
 
-  var capLettersArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+var capLettersArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-  var specialCharactersArray = "!@#$%^&*()".split("");
+var specialCharactersArray = "!@#$%^&*()".split("");
 
-  var passLengthUser = 0;
+var concatArray = [];
 
-  var result = "";
+var passLengthUser = 0;
 
-function generatePassword() {
-  //Z objects for user input
+var result = "";
+
+function generatePassword() { 
 
   let numbersUser = "";
   let lowLettersUser = "";
   let capLettersUser = "";
   let specialCharactersUser = "";
-
-  passLengthUser = 0;
-  result = "";
+  var concatArray = [];
+  var result = "";
 
   passLengthUser = window.prompt("Password length from 8 to 128 characters");
+  console.log(passLengthUser);
 
-  if (passLengthUser < 8) {
+  if (passLengthUser < 8 || passLengthUser > 128) {
     window.alert("Please choose from 8 to 128 characters.");
     return;
   }
 
-  if (passLengthUser > 128) {
-    window.alert("Please choose from 8 to 128 characters.");
-    return;
-  }
-
-  // logging boolean returns to confirm true or false
+  // boolean returns to confirm true or false with confirm
 
   numbersUser = confirm("User numbers?");
   console.log(numbersUser);
@@ -90,63 +82,43 @@ function generatePassword() {
   specialCharactersUser = confirm("Use special characters?");
   console.log(specialCharactersUser);  
 
-  // start logical operators madness
+  // logical operators to determine if restart required due to user not selecting any characters for password generation
 
-  if (numbersUser === false && lowLettersUser === false && capLettersUser === false && specialCharactersUser === false) {
-    alert("You must select a password length of between 8 and 128 characters in addition to one of the following options to generate a password: numbers, lower case letters, upper case letters, or special characters.");
+  if (
+    numbersUser === false &&
+    lowLettersUser === false &&
+    capLettersUser === false &&
+    specialCharactersUser === false
+  ) {
+    alert(
+      "You must select a password length of between 8 and 128 characters in addition to one of the following options to generate a password: numbers, lower case letters, upper case letters, or special characters."
+    );
     return;
   }
 
-  do {
-  (numbersUser === true && passLengthUser < result);
-    var nU = numbersArray[~~(Math.random)*numbersArray.length];
-    result = result + nU;
-    passLengthUser++;
-    console.log(result);
-    
-  (lowLettersUser === true && passLengthUser < result) 
-    var lL = lowLettersArray[~~(Math.random)*lowLettersArray.length];
-    result = result + lL;
-    passLengthUser++;
-    console.log(result);  
+  // create concatenated array containing user selected characters. will use ~~Math.random to select random characters from the array until generated password length matches the user input for passLengthUser
 
-   (capLettersUser === true && passLengthUser < result) 
-    var cL = capLettersArray [~~(Math.floor)*capLettersArray.length];
-    result = result + cL;
-    passLengthUser++;
-    console.log(result);  
-
-   (specialCharactersUser === true && passLengthUser < result) 
-    var sC = specialCharactersArray[~~(Math.random)*specialCharactersArray.length];
-    result = result + sC;
-    passLengthUser++;
-    console.log(result);
+  if (numbersUser === true) {
+    concatArray = concatArray.concat(numbersArray);
   }
-
-while (passLengthUser < result)
-
-return result;
-}
-
-
-
-
-   
-  //not going to concat if using math random
-
-  /*if (lowLettersUser === true) {
-    result = result.concat(passwordArray.numbersArray);
+  if (lowLettersUser === true) {
+    concatArray = concatArray.concat(lowLettersArray);
   }
-
   if (capLettersUser === true) {
-    result = result.concat(passwordArray.capLettersArray);
+    concatArray = concatArray.concat(capLettersArray);
   }
-
   if (specialCharactersUser === true) {
-    result = result.concat(passwordArray.specialCharactersArray);
-  }*/
+    concatArray = concatArray.concat(specialCharactersArray);
+  }
+  console.log(concatArray);
+  console.log(passLengthUser);
+  console.log(result);
 
+  // for 3 statements usually var / conditional / var++--. all statements optional. use blank ; to skip
 
-
-
-
+  for (let i = 0; i < passLengthUser; i++) {
+    result += concatArray[~~(Math.random() * concatArray.length)];
+    console.log();
+  }
+  return result;
+}
